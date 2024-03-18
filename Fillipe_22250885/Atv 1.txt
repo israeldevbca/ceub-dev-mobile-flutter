@@ -1,0 +1,17 @@
+=========================== ATIVIDADE 1 =============================
+void main() {
+
+int numero1 = 1;
+
+int numero2 = 2;
+
+int resultado = soma (numero1, numero2);
+
+print("A soma de $numero1 e $numero2 é: $resultado");
+}
+
+int soma(int num1, int num2) {
+
+
+return num1 + num2;
+}
