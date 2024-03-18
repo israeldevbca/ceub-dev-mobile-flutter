@@ -1,0 +1,18 @@
+=========================== ATIVIDADE 2 =============================
+void main() {
+
+int ano = 2002;
+
+int seculo = calcularSeculo (ano);
+
+print("0 ano $ano, é do século $seculo!");
+}
+
+int calcularSeculo(int ano) {
+
+// Divide o ano inserido por 100 e arredonda para cima para obter o século
+
+int seculo = (ano + 99) ~/ 100;
+
+return seculo;
+}
