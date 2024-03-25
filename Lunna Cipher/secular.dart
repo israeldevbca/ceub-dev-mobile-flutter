@@ -1,6 +1,6 @@
 
 dynamic secular({year = 2024, roman = false}) {
-  var sec = ((year/100).toInt()+1);
+  var sec = (year % 100 == 0) ? (year/100) : ((year/100).toInt()+1);
   if (!roman) return sec;
 
   return toRoman(sec);
