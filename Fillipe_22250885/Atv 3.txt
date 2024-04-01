@@ -1,0 +1,31 @@
+Vou responder às perguntas com base na documentação fornecida.
+
+1. Qual é a principal diferença entre a inicialização de aplicativos em sistemas Android em comparação com outros paradigmas de programação?
+   Resposta: b) Os aplicativos Android iniciam com uma instância de Activity, enquanto outros sistemas iniciam com um método main().
+
+2. O que é uma Activity em um aplicativo Android?
+   Resposta: c) Uma interface de usuário visível que permite a interação do usuário com o aplicativo.
+
+3. Qual é o propósito principal da classe Activity em um aplicativo Android?
+   Resposta: c) Facilitar a interação do usuário com o aplicativo.
+
+4. Como é possível definir uma Activity no manifesto de um aplicativo Android?
+   Resposta: d) Através do elemento <activity>.
+
+5. O que é necessário para uma Activity poder ser iniciada por outra atividade ou componente em um aplicativo Android?
+   Resposta: a) A atividade precisa ser declarada no arquivo de manifesto do aplicativo.
+
+6. Qual é a principal função do callback onCreate() em uma Activity?
+   Resposta: b) Inicializar componentes essenciais da atividade, como visualizações e layouts de interface do usuário.
+
+7. Quando o sistema chama o callback onStop() em uma Activity?
+   Resposta: c) Quando a atividade não está mais visível para o usuário.
+
+8. O que é recomendado não fazer dentro do callback onPause() de uma Activity?
+   Resposta: a) Realizar operações de entrada e saída de dados.
+
+9. Qual é o último callback que uma Activity recebe antes de ser destruída?
+   Resposta: c) onDestroy()
+
+10. Como uma Activity é identificada em um aplicativo Android?
+    Resposta: b) Pelo nome da classe da Activity especificada no arquivo de manifesto do aplicativo.
