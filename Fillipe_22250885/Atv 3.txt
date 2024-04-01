@@ -1,4 +1,4 @@
-Vou responder às perguntas com base na documentação fornecida.
+==================================Atv 3==============================================
 
 1. Qual é a principal diferença entre a inicialização de aplicativos em sistemas Android em comparação com outros paradigmas de programação?
    Resposta: b) Os aplicativos Android iniciam com uma instância de Activity, enquanto outros sistemas iniciam com um método main().
