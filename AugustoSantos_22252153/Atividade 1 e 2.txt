@@ -1,0 +1,36 @@
+===================ATIVIDADE 1===================
+void main() {
+
+int num = 1;
+
+int numero2 = 2;
+
+int resultado = soma (num, numero2);
+
+print("A soma de $num e $numero2 é: $resultado");
+}
+
+int soma(int num, int numero2) {
+
+
+return num + numero2;
+}
+
+===================ATIVIDADE 2===================
+void main() {
+
+int ano = 2004;
+
+int seculo = calcularSeculo (ano);
+
+print("0 ano $ano, é do século $seculo!");
+}
+
+int calcularSeculo(int ano) {
+
+// Divide o ano inserido por 100 e arredonda para cima para obter o século
+
+int seculo = (ano + 99) ~/ 100;
+
+return seculo;
+}
