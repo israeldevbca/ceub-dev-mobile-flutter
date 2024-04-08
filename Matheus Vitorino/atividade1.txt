@@ -1,0 +1,23 @@
+void main() {
+  //ATIVIDADE
+
+// Escreva uma função que retorne a soma de 2 números.
+// Escreva uma função que receba um ano (int) e retorne o século daquele ano.
+  
+  somaNumeros(double n1, double n2) {
+    double resultado = n1 + n2;
+    return resultado;
+  }
+  
+//   var soma = somaNumeros(2,5);
+//   print(soma);
+  
+  retornaSeculos(int ano) {
+    int seculo = (ano/100 + 1).toInt();
+    return seculo;
+  }
+  
+//   var ano = retornaSeculos(1999);
+//   print(ano);
+  
+}

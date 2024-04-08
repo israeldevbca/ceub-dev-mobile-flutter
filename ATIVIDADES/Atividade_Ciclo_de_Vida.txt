@@ -1,0 +1,8 @@
+Atividade 
+
+ - Faça um override dos métodos que cuidam do ciclo de vida. 
+  - Em cada callback adicione o um log ``Log.i("TELA", "SUA MENSAGEM")``
+  - Execute o aplicativo em um emulador ou dispositivo físico. 
+  - Mostre qual ordem de execução de cada callback do ciclo de vida do Android. 
+  - Gire o celular para horizontal? O que acontece?
+  - Aperte o botão de menu, para minimar o app, o que acontece?
