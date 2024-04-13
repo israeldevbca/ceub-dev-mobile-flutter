@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -73,7 +72,7 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
 
-        Log.i("TELA", "ACESSANDO onPause")
+        Log.i("TELA", "ACESSANDO onStop")
     }
 
 
@@ -92,7 +91,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ItemBloco(valor: String) {
+fun ItemCard(valor: String) {
     Surface(
         modifier = Modifier
             .width(80.dp)
@@ -103,68 +102,72 @@ fun ItemBloco(valor: String) {
                 text = valor,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.Center),
+                modifier = Modifier.align(Alignment.Center)
             )
         }
     }
 }
 
 @Composable
-fun Cabecalho(
-    nome: String,
-    sobreNome: String,
-    modifier: Modifier = Modifier
-) {
+fun Cabecalho(nome: String, sobreNome: String) {
+    //Organização de Layout
+    // Row, Columns
+
+
     Surface {
-        Box(modifier) {
+        Box(modifier = Modifier) {
             Image(
                 painter = painterResource(id = R.drawable.background_app),
-                contentDescription = "Background",
-                contentScale = ContentScale.Crop,
-                alpha = 0.4F
+                contentDescription = "",
+                contentScale = ContentScale.Crop
             )
+
             Column {
-                Box(modifier = Modifier.padding(16.dp)) {
-                    Row {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_user),
-                            contentDescription = "Logo Usuário",
-                            modifier = Modifier
-                                .size(60.dp)
-                                .align(Alignment.CenterVertically)
+                Row(modifier = Modifier.padding(16.dp)) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_user),
+                        contentDescription = "Ícone do usuário",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .align(Alignment.CenterVertically)
+                    )
+                    Column(modifier = Modifier.padding(32.dp)) {
+                        Text(
+                            text = nome,
+                            fontSize = 40.sp,
+                            fontWeight = FontWeight.Bold
                         )
-                        Column(modifier = modifier.padding(32.dp)) {
-                            Text(text = nome, fontSize = 40.sp, fontWeight = FontWeight.Bold)
-                            Text(
-                                text = sobreNome,
-                                fontSize = 12.sp,
-                                modifier = modifier.align(Alignment.End)
-                            )
-                        }
+                        Text(
+                            text = sobreNome,
+                            fontSize = 12.sp,
+                            modifier = Modifier.align(Alignment.End)
+                        )
                     }
                 }
+
                 /*
-                    Crie um linha com 3 elementos,
-                     - Adicione  na row horizontalArrangement
-                     - Faça testes com Arrangement.*
-                     - Adicione  na row modifier = Modifier.fillMaxSize()
-                 */
+                        Crie  uma linha com e Elementos
+                         - Adicione na row horizontalArrangement
+                         - Faça testes com Arrament.*
+                         - Adicione na row modifier = Modifier.fillMaxSize()
+                     */
+
                 Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    ItemBloco(valor = stringResource(id = R.string.numero_1))
-                    ItemBloco(valor = stringResource(id = R.string.numero_2))
-                    ItemBloco(valor = stringResource(id = R.string.numero_3))
+                    ItemCard(valor = "Confirmar")
+                    ItemCard(valor = "Cancelar")
                 }
+
+
             }
         }
-
     }
 }
 
 
-@Preview(name = "Cabeçalho")
+@Preview(name = "Preview Cabeçalho")
 @Composable
 fun CabecalhoPreview() {
     PlaygroundAndroidComposeTheme {
