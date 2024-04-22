@@ -11,3 +11,4 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val CorCeub = Color(0xFF4D1598)
+val CorBackground = Color(0xFFC2C2C2)
