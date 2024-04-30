@@ -3,6 +3,7 @@ package br.com.ceub.projeto.playgroundandroidcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,8 +38,7 @@ class ApresentacaoUsuarioActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = CorCeub
                 ) {
-
-
+                   AppApresentacao()
                 }
             }
 
@@ -74,30 +74,37 @@ fun CardApresentacao() {
 
 @Composable
 fun CardContato() {
-    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_email),
-                contentDescription = null,
-                modifier = Modifier.size(35.dp)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text = "fulano@gmail.com", color = Color.White)
-        }
+    Column(modifier = Modifier.fillMaxWidth(),
+           horizontalAlignment = Alignment.CenterHorizontally) {
+        ItemContato(image = R.drawable.ic_email,
+            descricaoContato = "fulano@gmail.com")
         Spacer(modifier = Modifier.height(16.dp))
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_phone),
-                contentDescription = null,
-                modifier = Modifier.size(35.dp)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(text = "+55 61 9999-88888", color = Color.White)
-        }
+        ItemContato(image = R.drawable.ic_phone,
+            descricaoContato = "+55 61 9999-88888")
+    }
+}
+
+@Composable
+fun ItemContato(@DrawableRes image : Int, descricaoContato : String) {
+    Row(modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center) {
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = null,
+            modifier = Modifier.size(35.dp)
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(text = descricaoContato, color = Color.White)
+    }
+}
+
+@Composable
+fun AppApresentacao(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly) {
+        CardApresentacao()
+        CardContato()
     }
 }
 
@@ -110,12 +117,7 @@ fun CardApresentacaoPreview() {
             modifier = Modifier.fillMaxSize(),
             color = CorCeub
         ) {
-            Column {
-                CardApresentacao()
-                CardContato()
-            }
-
-
+            AppApresentacao()
         }
     }
 }
