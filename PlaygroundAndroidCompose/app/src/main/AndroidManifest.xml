@@ -16,34 +16,19 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PlaygroundAndroidCompose">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
+            android:theme="@style/Theme.PlaygroundAndroidCompose"></activity>
         <activity
             android:name=".ApresentacaoUsuarioActivity"
             android:exported="true"
-            android:theme="@style/Theme.PlaygroundAndroidCompose">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
+            android:theme="@style/Theme.PlaygroundAndroidCompose"></activity>
         <activity
             android:name=".JogarDadosActivity"
-            android:exported="true">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".CalculadoraAlcoolGasolinaActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".lista.ListaImagensActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
