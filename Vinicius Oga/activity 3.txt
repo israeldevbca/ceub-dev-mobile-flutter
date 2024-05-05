@@ -1,0 +1,168 @@
+package br.com.ceub.projeto.playgroundandroidcompose
+
+import android.graphics.drawable.Icon
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.CorCeub
+import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.PlaygroundAndroidComposeTheme
+import java.text.NumberFormat
+import java.util.Locale
+
+
+/*
+TODO
+ Atividade - Termine o app  -> CalculadoraEtanolGasolinaActivity
+ OBs: Após a conclusão, copie a CalculadoraAlcoolGasolinaActivity e cole na sua pasta.
+ Após isso faça o pullRequest ou somente o commit caso já esteja com pull request aberto.
+ DATA ENTREGA: 06/05/24
+
+ - Atualize o campo com o textoResultado
+ - Crie o campo Etanol para ser repassado como parâmetro.
+ - Transforme Strings em resources. (Pesquise como fazer.)
+ - Adicione um icone ao campo gasolina. (Pesquise como fazer)
+ - Adicione um switch (Caso esteja marcado o calculo deve ser para 75% ao invés de 70%) (Pesquise como adicionar um switch)
+ */
+class CalculadoraAlcoolGasolinaActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            PlaygroundAndroidComposeTheme {
+                Surface(color = CorCeub, modifier = Modifier.fillMaxSize()) {
+                    CalculadoraApp()
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun CalculadoraApp() {
+    var valorGasolina by remember { mutableStateOf("5.39") }
+    var valorEtanol by remember { mutableStateOf("3.86") }
+    var switchChecked by remember { mutableStateOf(false) }
+
+    val valorGasolinaNumerico = valorGasolina.toDoubleOrNull() ?: 0.0
+    val valorEtanolNumerico = valorEtanol.toDoubleOrNull() ?: 0.0
+
+    val porcentagem = if (switchChecked) 0.75 else 0.7
+
+    val textoResultado = if (valorEtanolNumerico / valorGasolinaNumerico > porcentagem) {
+        "Vantagem em abastecer com Gasolina."
+    } else {
+        "Vantagem em abastecer com Etanol."
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.app_name),
+            modifier = Modifier.padding(bottom = 16.dp),
+            style = MaterialTheme.typography.titleLarge,
+            color = Color.White
+        )
+        CampoNumerico(
+            valor = valorGasolina,
+            onValorAlterado = { valorGasolina = it },
+            label = stringResource(id = R.string.gasolina_label),
+            leadingIcon = Icons.Default.ShoppingCart
+        )
+        CampoNumerico(
+            valor = valorEtanol,
+            onValorAlterado = { valorEtanol = it },
+            label = stringResource(id = R.string.etanol_label),
+            leadingIcon = Icons.Default.ShoppingCart
+        )
+        Switch(
+            checked = switchChecked,
+            onCheckedChange = { switchChecked = it },
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Text(
+            text = textoResultado,
+            style = MaterialTheme.typography.titleLarge,
+            color = Color.White
+        )
+    }
+}
+@Composable
+fun CampoNumerico(
+    valor: String,
+    onValorAlterado: (String) -> Unit,
+    label: String,
+    leadingIcon: ImageVector,
+    modifier: Modifier = Modifier
+) {
+    TextField(
+        value = valor,
+        onValueChange = onValorAlterado,
+        label = { Text(text = label) },
+        leadingIcon = { Icon(leadingIcon, contentDescription = null) },
+        modifier = modifier
+            .wrapContentHeight()
+            .padding(bottom = 16.dp)
+    )
+}
+
+private fun calcularEtanolVersusGasolina(
+    valorGasolina: Double,
+    valorEtanol: Double = 3.86
+): String {
+
+    val porcentagem = valorEtanol / valorGasolina
+    val porcentagemFmt = NumberFormat.getPercentInstance().format(porcentagem)
+    if (porcentagem > 0.7) {
+        return "Vantagem em abastecer com Gasolina. Porcentagem em: ${porcentagemFmt}"
+    }
+    return "Vantagem em abastecer com Etanol. Porcentagem em: ${porcentagemFmt}"
+
+}
+
+@Preview
+@Composable
+fun CalculadoraAppPreview() {
+    PlaygroundAndroidComposeTheme {
+        Surface(color = CorCeub, modifier = Modifier.fillMaxSize()) {
+            CalculadoraApp()
+        }
+    }
+}
