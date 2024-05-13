@@ -29,6 +29,9 @@
             android:exported="true"></activity>
         <activity
             android:name=".lista.ListaImagensActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".dog.AppDogActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
