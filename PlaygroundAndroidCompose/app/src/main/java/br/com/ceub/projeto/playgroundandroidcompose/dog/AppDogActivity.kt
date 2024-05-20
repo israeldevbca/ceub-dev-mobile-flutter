@@ -3,7 +3,11 @@ package br.com.ceub.projeto.playgroundandroidcompose.dog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,9 +22,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +42,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.ceub.projeto.playgroundandroidcompose.R
 import br.com.ceub.projeto.playgroundandroidcompose.dog.model.Dog
 import br.com.ceub.projeto.playgroundandroidcompose.dog.model.listaDogs
 import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.PlaygroundAndroidComposeTheme
@@ -54,11 +62,33 @@ class AppDogActivity : ComponentActivity() {
 
 @Composable
 fun AppDog() {
-    LazyColumn {
-        items(listaDogs) { dog ->
-            DogItem(dog = dog, modifier = Modifier.padding(8.dp))
+
+    Scaffold(
+        topBar = {
+            AppBarDog()
+        }
+    ) { it ->
+        LazyColumn(contentPadding = it) {
+            items(listaDogs) { dog ->
+                DogItem(dog = dog, modifier = Modifier.padding(8.dp))
+            }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppBarDog() {
+    CenterAlignedTopAppBar(title = {
+        Row {
+            Image(
+                painter = painterResource(id = R.drawable.icon_dog),
+                contentDescription = null,
+                modifier = Modifier.size(50.dp)
+            )
+            Text(text = "App Dog", style = MaterialTheme.typography.displaySmall)
+        }
+    })
 }
 
 @Preview
@@ -87,7 +117,14 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
             topEnd = 0.dp
         )
     ) {
-        Column {
+        Column(
+            modifier = Modifier.animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioHighBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
+            )
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -107,13 +144,13 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
                     Icon(
                         imageVector = if (iconeExpandido)
                             Icons.Filled.ExpandLess
-                            else Icons.Filled.ExpandMore,
+                        else Icons.Filled.ExpandMore,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.secondary
                     )
                 }
             }
-            if(iconeExpandido){
+            if (iconeExpandido) {
                 SobreDog(dog = dog)
             }
 
@@ -123,9 +160,12 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
 
 @Composable
 fun SobreDog(dog: Dog) {
-    Column(modifier = Modifier.padding(
-        start = 32.dp,
-        bottom = 8.dp)){
+    Column(
+        modifier = Modifier.padding(
+            start = 32.dp,
+            bottom = 8.dp
+        )
+    ) {
         Text(
             text = "Sobre:",
             style = MaterialTheme.typography.labelSmall
