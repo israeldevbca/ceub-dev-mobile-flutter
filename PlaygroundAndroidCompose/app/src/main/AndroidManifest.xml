@@ -23,7 +23,13 @@
             android:theme="@style/Theme.PlaygroundAndroidCompose"></activity>
         <activity
             android:name=".JogarDadosActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".CalculadoraAlcoolGasolinaActivity"
             android:exported="true"></activity>
@@ -32,12 +38,11 @@
             android:exported="true"></activity>
         <activity
             android:name=".dog.AppDogActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".misturaletras.AppGameActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
