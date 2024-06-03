@@ -21,9 +21,9 @@ você poderá testar seus conhecimentos e habilidades enquanto se diverte.
 
 ## Capturas de Tela
 
-![Pontuação](assets/Captura1.gif)
-![Fim do Jogo](assets/Captura2.gif)
-![Pulando palavras](assets/captura3.gif)
+<img src="assets/Captura1.gif" alt="Pontuação" height="500"/>
+<img src="assets/Captura2.gif" alt="Fim do Jogo" height="500"/>
+<img src="assets/captura3.gif" alt="Pulando palavras" height="500"/>
 
 ## Como Jogar
 
