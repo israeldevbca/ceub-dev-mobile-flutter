@@ -21,9 +21,9 @@ você poderá testar seus conhecimentos e habilidades enquanto se diverte.
 
 ## Capturas de Tela
 
-![Pontuação](https://ibb.co/gWF8HT9)
-![Fim do Jogo](https://ibb.co/WDZxQdP)
-![Pulando palavras](https://ibb.co/Y7sF5xc)
+![Pontuação](https://i.ibb.co/kM8tDf6/pontuacao.png)
+![Fim do Jogo](https://i.ibb.co/TMDhV1P/fim-do-jogo.png)
+![Pulando palavras](https://i.ibb.co/djbBdL6/pulando-palavras.png)
 
 ## Como Jogar
 
@@ -40,22 +40,13 @@ você poderá testar seus conhecimentos e habilidades enquanto se diverte.
     git clone https://github.com/seu-usuario/mistura-letras.git
     ```
 2. **Abra no Android Studio**:
-    - Vá em `File > Open` e selecione o diretório do projeto.
+   - Vá em `File > Open` e selecione o diretório do projeto.
 3. **Construa o Projeto**:
-    - Clique em `Build > Make Project` ou pressione `Ctrl+F9`.
+   - Clique em `Build > Make Project` ou pressione `Ctrl+F9`.
 4. **Execute o Aplicativo**:
-    - Conecte um dispositivo Android ou use um emulador.
-    - Clique em `Run > Run 'app'` ou pressione `Shift+F10`.
+   - Conecte um dispositivo Android ou use um emulador.
+   - Clique em `Run > Run 'app'` ou pressione `Shift+F10`.
 
-## Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests para melhorar o
-projeto.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais
-detalhes.
 
 ## Integrantes
 
