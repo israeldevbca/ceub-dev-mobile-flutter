@@ -1,6 +1,6 @@
 # Mistura Letras
 
-![App Logo](https://static.vecteezy.com/ti/vetor-gratis/p1/15472262-design-de-icone-criativo-de-palavras-cruzadas-gratis-vetor.jpg)
+![App Logo](assets/jogo.jpg)
 
 ## Descrição
 
@@ -21,9 +21,9 @@ você poderá testar seus conhecimentos e habilidades enquanto se diverte.
 
 ## Capturas de Tela
 
-![Pontuação](https://i.ibb.co/kM8tDf6/pontuacao.png)
-![Fim do Jogo](https://i.ibb.co/TMDhV1P/fim-do-jogo.png)
-![Pulando palavras](https://i.ibb.co/djbBdL6/pulando-palavras.png)
+![Pontuação](assets/Captura1.gif)
+![Fim do Jogo](assets/Captura2.gif)
+![Pulando palavras](assets/captura3.gif)
 
 ## Como Jogar
 
@@ -46,7 +46,6 @@ você poderá testar seus conhecimentos e habilidades enquanto se diverte.
 4. **Execute o Aplicativo**:
    - Conecte um dispositivo Android ou use um emulador.
    - Clique em `Run > Run 'app'` ou pressione `Shift+F10`.
-
 
 ## Integrantes
 
