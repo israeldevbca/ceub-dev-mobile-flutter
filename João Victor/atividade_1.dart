@@ -1,4 +1,9 @@
-//Atividade
+void main() {
+	
+//ATIVIDADE
+
+// Escreva uma função que retorne a soma de 2 números.
+// Escreva uma função que receba um ano (int) e retorne o século daquele ano.
 
 
   double somaNumeros(double n1, double n2) {
@@ -17,3 +22,5 @@
   }
   
   print(getSeculoAnoCeil(2000));
+	
+}
