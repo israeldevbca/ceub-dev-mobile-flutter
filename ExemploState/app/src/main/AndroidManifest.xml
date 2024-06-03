@@ -10,39 +10,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PlaygroundAndroidCompose"
+        android:theme="@style/Theme.ExemploState"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PlaygroundAndroidCompose"></activity>
-        <activity
-            android:name=".ApresentacaoUsuarioActivity"
-            android:exported="true"
-            android:theme="@style/Theme.PlaygroundAndroidCompose"></activity>
-        <activity
-            android:name=".JogarDadosActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".CalculadoraAlcoolGasolinaActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".lista.ListaImagensActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".dog.AppDogActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".misturaletras.AppGameActivity"
-            android:exported="true">
+            android:theme="@style/Theme.ExemploState">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
