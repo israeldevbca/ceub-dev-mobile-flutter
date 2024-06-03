@@ -1,6 +1,6 @@
 # Mistura Letras
 
-![App Logo](assets/jogo.jpg)
+<img src="assets/jogo.jpg" alt="App Logo" width="200"/>
 
 ## Descrição
 
