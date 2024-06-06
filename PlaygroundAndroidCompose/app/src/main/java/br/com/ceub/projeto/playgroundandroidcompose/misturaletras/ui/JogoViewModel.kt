@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.update
 
 class JogoViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow(JogoUiState()) //Somente a viewmodel ver
-    val uiState: StateFlow<JogoUiState> = _uiState.asStateFlow() // Aqui a Jogo pode usar
+    private val _uiState = MutableStateFlow(JogoUiState())
+    val uiState: StateFlow<JogoUiState> = _uiState.asStateFlow()
 
-    private var palavraUsadas: MutableSet<String> = mutableSetOf()
+    private var palavrasUsadas: MutableSet<String> = mutableSetOf()
     private lateinit var palavraAtual: String
 
     var tentativaPalavra by mutableStateOf("")
@@ -25,12 +25,7 @@ class JogoViewModel : ViewModel() {
         reiniciarJogo()
     }
 
-    fun reiniciarJogo() {
-        palavraUsadas.clear()
-        _uiState.value = JogoUiState(palavraEmbaralhada = getPalavraEmbaralhada())
-    }
-
-    fun embaralharPalavra(palavra: String): String {
+    private fun embaralharPalavra(palavra: String): String {
         val palavraArray = palavra.toCharArray()
         palavraArray.shuffle()
         while (String(palavraArray) == palavra) {
@@ -39,42 +34,67 @@ class JogoViewModel : ViewModel() {
         return String(palavraArray)
     }
 
-    fun getPalavraEmbaralhada(): String {
+    private fun getPalavraEmbaralhada(): String {
         palavraAtual = PalavrasDataSource().todasAsPalavras.random()
-        if (palavraUsadas.contains(palavraAtual)) {
+        if (palavrasUsadas.contains(palavraAtual)) {
             return getPalavraEmbaralhada()
+        } else {
+            palavrasUsadas.add(palavraAtual)
+            return embaralharPalavra(palavraAtual)
         }
-        palavraUsadas.add(palavraAtual)
-        return embaralharPalavra(palavraAtual)
     }
 
     fun getTotalPalavras(): Int {
-        return palavraUsadas.size
+        return PalavrasDataSource().todasAsPalavras.size
     }
 
-    fun atualizaTentativaPalavra(valor: String) {
-        tentativaPalavra = valor
+    fun reiniciarJogo() {
+        palavrasUsadas.clear()
+        _uiState.value = JogoUiState(palavraEmbaralhadaAtual = getPalavraEmbaralhada())
+    }
+
+    fun atualizarTentativaAdivinharPalavra(tentantiva: String) {
+        tentativaPalavra = tentantiva
+    }
+
+    private fun atualizarJogoSucessoState(pontuacaoAtualizada: Int) {
+        if (palavrasUsadas.size == getTotalPalavras()) {
+
+            _uiState.update { status -> //atualiza a ui
+                status.copy(
+                    pontuacao = pontuacaoAtualizada,
+                    isPalavraIncorreta = false,
+                    isFimJogo = true
+                )
+            }
+
+        } else {
+            _uiState.update { status -> //atualiza a ui
+                status.copy(
+                    pontuacao = pontuacaoAtualizada,
+                    isPalavraIncorreta = false,
+                    palavraEmbaralhadaAtual = getPalavraEmbaralhada(),
+                    contadorPalavras = status.contadorPalavras.inc()
+                )
+            }
+        }
     }
 
     fun verificarTentativaPalavra() {
         if (tentativaPalavra.equals(palavraAtual, ignoreCase = true)) {
-            val pontuacaoAtualizada = _uiState.value.pontuacao.plus(1)
-            atualizarStateSucessoJogo(pontuacaoAtualizada)
+            val pontuacaoAtualizada = _uiState.value.pontuacao.plus(1) //Atualiza
+            atualizarJogoSucessoState(pontuacaoAtualizada)
         } else {
             _uiState.update { status ->
                 status.copy(isPalavraIncorreta = true)
             }
         }
-        atualizaTentativaPalavra("")
+        atualizarTentativaAdivinharPalavra("")
     }
 
-    fun atualizarStateSucessoJogo(pontuacaoAtualiza: Int) {
-        _uiState.update { status ->
-            status.copy(
-                pontuacao = pontuacaoAtualiza,
-                isPalavraIncorreta = false,
-            )
-        }
+    fun pularPalavra() {
+        atualizarJogoSucessoState(_uiState.value.pontuacao)
+        atualizarTentativaAdivinharPalavra("")
     }
 
 

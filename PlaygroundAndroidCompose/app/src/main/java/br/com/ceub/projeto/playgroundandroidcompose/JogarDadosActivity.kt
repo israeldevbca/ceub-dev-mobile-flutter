@@ -26,15 +26,13 @@ import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.CorCeub
 import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.PlaygroundAndroidComposeTheme
 
 class JogarDadosActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             PlaygroundAndroidComposeTheme {
-                Surface(
-                    color = CorCeub,
-                    modifier = Modifier.fillMaxSize()
-                ) {
+                Surface(modifier = Modifier.fillMaxSize(), color = CorCeub) {
                     JogarDadosApp()
                 }
             }
@@ -49,12 +47,10 @@ fun JogarDadosApp() {
 
 @Composable
 fun ImagemDadoComBotao(
-    meuModifier: Modifier =
-        Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
+    modifier: Modifier = Modifier
+        .fillMaxSize()
+        .wrapContentSize(Alignment.Center)
 ) {
-
     var valorDado by remember {
         mutableIntStateOf(1)
     }
@@ -62,30 +58,29 @@ fun ImagemDadoComBotao(
     val imagemResource = when (valorDado) {
         1 -> R.drawable.dado_1
         2 -> R.drawable.dado_2
-        3 -> R.drawable.dado_4
+        3 -> R.drawable.dado_3
         4 -> R.drawable.dado_4
         5 -> R.drawable.dado_5
         else -> R.drawable.dado_6
     }
 
     Column(
-        modifier = meuModifier,
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Image(
-            painter = painterResource(id = imagemResource),
-            contentDescription = null
-        )
+        Image(painter = painterResource(id = imagemResource), contentDescription = null)
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             valorDado = (1..6).random()
         }) {
             Text(text = "Jogar")
         }
+
     }
 
 }
+
 
 @Preview
 @Composable
