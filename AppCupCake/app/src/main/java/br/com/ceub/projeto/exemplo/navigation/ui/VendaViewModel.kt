@@ -44,7 +44,7 @@ class VendaViewModel : ViewModel() {
         quantidade: Int = _uiState.value.quantidade,
     ) : String {
         var valorCalculado = quantidade * PRECO_CUPCAKE
-        val precoFormatado = NumberFormat.getCurrencyInstance().format(valorCalculado)
+        val precoFormatado = NumberFormat.getCurrencyInstance(Locale("pt_br", "br")).format(valorCalculado)
         return precoFormatado
     }
 

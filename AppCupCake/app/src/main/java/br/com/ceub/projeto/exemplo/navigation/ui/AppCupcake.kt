@@ -91,6 +91,7 @@ fun AppCupcake(
                     qtdOpcoes = CupcakeDataSource.quantidades,
                     onProximoBotaoClick = {
                         viewModel.setQuantidade(it)
+                        //Navegar para a tela de sabores
                         navController.navigate(PagesCupcake.sabores.name)
                     },
                 )
@@ -102,7 +103,8 @@ fun AppCupcake(
                     onProximoBotaoClick = { navController.navigate(PagesCupcake.resumo.name) },
                     onCancelarClick = { cancelarVendaENavegarParaInicio(viewModel, navController) },
                     opcoes = CupcakeDataSource.sabores,
-                    onSelecionarOpcao = { viewModel.setSabor(it) },
+                    onSelecionarOpcao = { opcaoSelecionada ->
+                        viewModel.setSabor(opcaoSelecionada) },
                     modifier = Modifier.fillMaxSize())
             }
 
@@ -131,6 +133,7 @@ private fun cancelarVendaENavegarParaInicio(
     navController: NavHostController
 ) {
     viewModel.reiniciarVenda()
+    //Navegar para trás para a tela de início
     navController.popBackStack(PagesCupcake.inicio.name, inclusive = false)
 }
 
