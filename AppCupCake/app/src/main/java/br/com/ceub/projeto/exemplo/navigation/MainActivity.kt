@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.ceub.projeto.exemplo.navigation.ui.AppCupcake
 import br.com.ceub.projeto.exemplo.navigation.ui.theme.AppCupCakeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,40 +24,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppCupCakeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppCupcake()
             }
         }
-    }
-}
-
-@Composable
-fun SubTotalComponent(subTotal: String) {
-    Text(
-        text = "SubTotal ${subTotal}",
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        style = MaterialTheme.typography.titleLarge.copy(textAlign = TextAlign.End)
-    )
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppCupCakeTheme {
-        Greeting("Android")
     }
 }

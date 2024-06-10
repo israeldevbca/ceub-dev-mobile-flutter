@@ -4,9 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,7 +24,7 @@ import br.com.ceub.projeto.exemplo.navigation.ui.theme.AppCupCakeTheme
 @Composable
 fun InicioVendaPage(
     qtdOpcoes : List<Pair<String, Int>>,
-    modifier: Modifier
+    onProximoBotaoClick: (Int) -> Unit
 ) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally,) {
@@ -43,7 +41,7 @@ fun InicioVendaPage(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
             qtdOpcoes.forEach { qtdPedido ->
-                Button(onClick = { /*TODO*/ },  modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                Button(onClick = { onProximoBotaoClick(qtdPedido.second) },  modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                     Text(text = "${qtdPedido.first} CupCake")
                 }
 
@@ -60,8 +58,7 @@ fun InicioVendaPagePreview() {
     AppCupCakeTheme {
         InicioVendaPage(
             qtdOpcoes = CupcakeDataSource.quantidades,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp))
+            onProximoBotaoClick = {},
+        )
     }
 }

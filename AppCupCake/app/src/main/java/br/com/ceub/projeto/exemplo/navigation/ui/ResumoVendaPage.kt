@@ -18,12 +18,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.ceub.projeto.exemplo.navigation.SubTotalComponent
 import br.com.ceub.projeto.exemplo.navigation.ui.theme.AppCupCakeTheme
 
 @Composable
 fun ResumoVendaPage(
     vendaUiState: VendaUiState,
+    onCancelarClick: () -> Unit,
+    onFinalizarCLick: (String, String) -> Unit,
     modifier: Modifier
 ){
     Column(modifier = modifier) {
@@ -35,16 +36,24 @@ fun ResumoVendaPage(
         SubTotalComponent(subTotal = vendaUiState.valor)
         Spacer(modifier = Modifier.weight(1f))
         Row(modifier = Modifier.fillMaxWidth().padding(16.dp)){
-            Column(){
-                Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
+            val resumo : String = resumoPedido(uiState = vendaUiState)
+            Column{
+                Button(onClick = { onFinalizarCLick("Pedido Cupcake", resumo) },
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
                     Text(text = "Finalizar")
                 }
-                OutlinedButton(onClick = { /*TODO*/ },  modifier = Modifier.fillMaxWidth()) {
+                OutlinedButton(onClick = onCancelarClick,  modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Cancelar")
                 }
             }
         }
     }
+}
+
+
+private fun resumoPedido(uiState: VendaUiState) : String {
+    val resumo = "Pedido de Cupcake - ${uiState.quantidade} Cupcake no total de R$ ${uiState.valor} "
+    return resumo
 }
 
 @Composable
@@ -62,7 +71,10 @@ fun ItemPedido(descricao: String, valor: String) {
 fun ResumoVendaPagePreview() {
     AppCupCakeTheme {
         Surface {
-            ResumoVendaPage(vendaUiState = VendaUiState(), modifier = Modifier.fillMaxSize())
+            ResumoVendaPage(vendaUiState = VendaUiState(),
+                onCancelarClick = {},
+                onFinalizarCLick = {resumo, pedido -> print("$resumo") },
+                modifier = Modifier.fillMaxSize())
         }
     }
 }
