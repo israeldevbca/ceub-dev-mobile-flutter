@@ -7,7 +7,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -48,6 +47,7 @@ import br.com.ceub.projeto.playgroundandroidcompose.dog.model.listaDogs
 import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.PlaygroundAndroidComposeTheme
 
 class AppDogActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -62,12 +62,8 @@ class AppDogActivity : ComponentActivity() {
 
 @Composable
 fun AppDog() {
-
-    Scaffold(
-        topBar = {
-            AppBarDog()
-        }
-    ) { it ->
+    //Scaffold - Add quando for adicionar a TopBar
+    Scaffold(topBar = { DogTopAppBar() }) { it ->
         LazyColumn(contentPadding = it) {
             items(listaDogs) { dog ->
                 DogItem(dog = dog, modifier = Modifier.padding(8.dp))
@@ -76,28 +72,14 @@ fun AppDog() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBarDog() {
-    CenterAlignedTopAppBar(title = {
-        Row {
-            Image(
-                painter = painterResource(id = R.drawable.icon_dog),
-                contentDescription = null,
-                modifier = Modifier.size(50.dp)
-            )
-            Text(text = "App Dog", style = MaterialTheme.typography.displaySmall)
-        }
-    })
-}
-
-@Preview
-@Composable
-fun AppDogPreview() {
-    PlaygroundAndroidComposeTheme(darkTheme = true) {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            AppDog()
-        }
+fun SobreDog(descricao: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = "Sobre:",
+            style = MaterialTheme.typography.labelSmall)
+        Text(text = descricao,
+            style = MaterialTheme.typography.bodyLarge)
     }
 }
 
@@ -110,84 +92,87 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
 
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(
-            topStart = 70.dp,
-            bottomEnd = 35.dp,
-            bottomStart = 16.dp,
-            topEnd = 0.dp
-        )
+        shape = RoundedCornerShape(topStart = 70.dp, bottomStart = 35.dp, topEnd = 16.dp)
     ) {
-        Column(
-            modifier = Modifier.animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioHighBouncy,
-                    stiffness = Spring.StiffnessMedium
-                )
-            )
-        ) {
+        //Column só depois para expanndido
+        Column(modifier = Modifier.animateContentSize(
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioHighBouncy,
+                stiffness = Spring.StiffnessMedium)
+        )){
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painter = painterResource(id = dog.img),
-                    contentDescription = dog.nome,
                     modifier = modifier
                         .size(75.dp)
                         .padding(16.dp)
                         .clip(MaterialTheme.shapes.large),
+                    painter = painterResource(id = dog.img),
+                    contentDescription = dog.nome,
                     contentScale = ContentScale.Crop
                 )
                 InfoDog(dog = dog)
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(onClick = { iconeExpandido = !iconeExpandido }) {
                     Icon(
-                        imageVector = if (iconeExpandido)
-                            Icons.Filled.ExpandLess
-                        else Icons.Filled.ExpandMore,
+                        imageVector = if (iconeExpandido) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.secondary
                     )
                 }
             }
-            if (iconeExpandido) {
-                SobreDog(dog = dog)
+            if(iconeExpandido) {
+                SobreDog(descricao = dog.hoobie,
+                    modifier = Modifier.padding(start = 32.dp,
+                        bottom = 16.dp))
             }
 
         }
     }
 }
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SobreDog(dog: Dog) {
-    Column(
-        modifier = Modifier.padding(
-            start = 32.dp,
-            bottom = 8.dp
-        )
-    ) {
-        Text(
-            text = "Sobre:",
-            style = MaterialTheme.typography.labelSmall
-        )
-        Text(
-            text = dog.hobbie,
-            style = MaterialTheme.typography.bodyLarge
-        )
-    }
+fun DogTopAppBar(modifier: Modifier = Modifier) {
+    CenterAlignedTopAppBar(title = {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.icon_dog),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(50.dp)
+                    .padding(8.dp)
+            )
+            Text(
+                text = "App Dog",
+                style = MaterialTheme.typography.displaySmall,
+            )
+        }
+    }, modifier = modifier)
 }
 
-
 @Composable
-fun InfoDog(dog: Dog) {
+fun InfoDog(dog: Dog, modifier: Modifier = Modifier) {
     Column {
         Text(
             text = dog.nome,
             style = MaterialTheme.typography.titleLarge
         )
-        Text(
-            text = "Idade: ${dog.idade}",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Text(text = "Idade: ${dog.idade}", style = MaterialTheme.typography.bodyLarge)
+    }
+}
+
+
+@Preview
+@Composable
+fun AppDogPreview() {
+    PlaygroundAndroidComposeTheme(darkTheme = true) {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            AppDog()
+        }
     }
 }

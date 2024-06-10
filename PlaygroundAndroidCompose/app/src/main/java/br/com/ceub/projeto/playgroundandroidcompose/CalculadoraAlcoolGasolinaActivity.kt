@@ -5,16 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -36,17 +39,13 @@ import java.util.Locale
 
 
 /*
-TODO
- Atividade - Termine o app  -> CalculadoraEtanolGasolinaActivity
- OBs: Após a conclusão, copie a CalculadoraAlcoolGasolinaActivity e cole na sua pasta.
- Após isso faça o pullRequest ou somente o commit caso já esteja com pull request aberto.
- DATA ENTREGA: 06/05/24
-
- - Atualize o campo com o textoResultado
+TODO Atividade
  - Crie o campo Etanol para ser repassado como parâmetro.
- - Transforme Strings em resources. (Pesquise como fazer.)
- - Adicione um icone ao campo gasolina. (Pesquise como fazer)
- - Adicione um switch (Caso esteja marcado o calculo deve ser para 75% ao invés de 70%) (Pesquise como adicionar um switch)
+ - Transforme Strings em resource
+ - Adicione um icone ao campo gasolina.
+
+  - Desafio de aula
+   - Como atualizar o valor do texto com o resultado do da porcentagem.
  */
 class CalculadoraAlcoolGasolinaActivity : ComponentActivity() {
 
@@ -71,10 +70,16 @@ fun CalculadoraApp() {
         mutableStateOf("5,39")
     }
 
+    var isProporcao70 by remember {
+        mutableStateOf(false)
+    }
+
+    //Segunda etapa
     val formatadorNumero = NumberFormat.getNumberInstance(Locale("pt", "BR"))
     val valorGasolinaNumerico = formatadorNumero.parse(valorEntrada)?.toDouble() ?: 0.0
     val textoResultado = calcularEtanolVersusGasolina(
         valorGasolina = valorGasolinaNumerico,
+        isProporcao70 = isProporcao70
     )
 
     Column(
@@ -95,8 +100,24 @@ fun CalculadoraApp() {
             style = MaterialTheme.typography.titleLarge
         )
         CampoNumerico(valor = valorEntrada, onValorAlterado = { valorEntrada = it })
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .size(48.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Usar Proporção ANFAVEA (70%)",
+                color = Color.White,
+                style = MaterialTheme.typography.titleSmall
+            )
+            Switch(checked = isProporcao70, onCheckedChange = { isProporcao70 = it })
+        }
+
         Text(
-            text = "Vantagem em abastecer [ALTERAR] ",
+//            text = "Alcool em R$ 4,07 , vale a pena  usar Gasolina",
+            text = textoResultado,
             color = Color.White,
             style = MaterialTheme.typography.titleLarge
         )
@@ -112,6 +133,10 @@ fun CampoNumerico(
         .fillMaxWidth()
 ) {
 
+//    var valorEntrada by remember {
+//        mutableStateOf("0")
+//    }
+
     TextField(
         label = {
             Text(text = "R$ Gasolina")
@@ -122,6 +147,7 @@ fun CampoNumerico(
             imeAction = ImeAction.Done
         ),
         value = valor,
+//        onValueChange = { valorEntrada = it },
         onValueChange = onValorAlterado,
         modifier = modifier
     )
@@ -129,12 +155,13 @@ fun CampoNumerico(
 
 private fun calcularEtanolVersusGasolina(
     valorGasolina: Double,
+    isProporcao70: Boolean,
     valorEtanol: Double = 3.86
 ): String {
 
     val porcentagem = valorEtanol / valorGasolina
     val porcentagemFmt = NumberFormat.getPercentInstance().format(porcentagem)
-    if (porcentagem > 0.7) {
+    if ((isProporcao70 && porcentagem > 0.7) || (!isProporcao70 && porcentagem > 0.75)) {
         return "Vantagem em abastecer com Gasolina. Porcentagem em: ${porcentagemFmt}"
     }
     return "Vantagem em abastecer com Etanol. Porcentagem em: ${porcentagemFmt}"
