@@ -1,0 +1,8 @@
+Na aula do dia 06/05 aprendemos a criar uma lista, fizemos uma lista de paisagens com cards.
+
+Agora torne essa lista em uma grid de duas colunas. Use a documentação oficial para saber como fazer. 
+Documentação: https://developer.android.com/develop/ui/compose/lists?hl=pt-br
+
+- Copie a classe kotlin e cole na sua pasta do github. Faça o commit e push. Caso já tenha feito o Pull Request ele esta aberto ainda para receber os commits. 
+
+Obs: As imagens estão no arquivo Paisagens.zip
