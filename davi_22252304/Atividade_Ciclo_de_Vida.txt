@@ -1,0 +1,8 @@
+ACESSANDO onCreate
+ACESSANDO onStart
+Acessando onPause
+ACESSANDO onStop
+ACESSANDO onCreate
+ACESSANDO onStart
+ACESSANDO onPause
+ACESSANDO onStop
