@@ -1,0 +1,12 @@
+2024-04-07 18:40:35.744  6593-6593  MainActivity            com.example.myapplication            D  onCreate Called
+2024-04-07 18:40:36.094  6593-6593  MainActivity            com.example.myapplication            D  onStart Called
+2024-04-07 18:40:36.100  6593-6593  MainActivity            com.example.myapplication            D  onResume Called
+2024-04-07 18:41:25.636  6593-6593  MainActivity            com.example.myapplication            D  onStop Called
+2024-04-07 18:41:25.683  6593-6593  MainActivity            com.example.myapplication            D  onCreate Called
+2024-04-07 18:41:25.694  6593-6593  MainActivity            com.example.myapplication            D  onStart Called
+2024-04-07 18:41:25.697  6593-6593  MainActivity            com.example.myapplication            D  onResume Called
+2024-04-07 18:41:38.924  6593-6593  MainActivity            com.example.myapplication            D  onStop Called
+2024-04-07 18:42:00.924  6593-6593  MainActivity            com.example.myapplication            D  onCreate Called
+2024-04-07 18:42:00.938  6593-6593  MainActivity            com.example.myapplication            D  onStart Called
+2024-04-07 18:42:00.940  6593-6593  MainActivity            com.example.myapplication            D  onResume Called
+2024-04-07 18:42:03.891  6593-6593  MainActivity            com.example.myapplication            D  onStop Called
