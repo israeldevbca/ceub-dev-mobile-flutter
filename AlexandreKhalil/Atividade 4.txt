@@ -1,0 +1,33 @@
+============================================ atv4 kotlin===========================================
+1) Qual das seguintes declarações de variáveis é válida?
+Resposta: c) val hello = "hello"
+
+2) É considerado uma boa prática declarar uma variável que não mudará usando var em vez de val.
+Resposta: b) Falso
+
+3) Quais das seguintes maneiras são válidas de atualizar uma variável? Escolha quantas respostas julgar adequadas.
+Resposta: a) total++, c) total--, d) total = total + 1
+
+4) Em Kotlin, os comentários podem ser de uma linha ou de várias linhas e são ignorados pelo compilador.
+Resposta: a) Verdadeiro
+
+5) Qual dos seguintes não é um tipo de dados em Kotlin?
+Resposta: b) Decimal
+
+6) Float também representa um decimal, mas é menos preciso que Double.
+Resposta: a) Verdadeiro
+
+7) Em Kotlin, o ponto de entrada de um programa é o ___.
+Resposta: c) main() function
+
+8) Quais das seguintes são verdadeiras sobre os valores de retorno de função? Escolha quantas respostas julgar adequadas.
+Resposta: a) Se uma função não especifica um tipo de retorno, o tipo de retorno é Unit.
+           b) Um valor de retorno pode ser armazenado em uma variável.
+           d) O tipo de um valor de retorno deve coincidir com o tipo de retorno de uma função.
+
+9) Quais das seguintes são verdadeiras sobre funções? Escolha quantas respostas julgar adequadas.
+Resposta: a) As funções podem receber parâmetros ou variáveis como entrada.
+           d) Dividir seu código em funções separadas torna seu código mais fácil de manter.
+
+10) Com argumentos nomeados, você pode alterar a ordem na qual passa os argumentos para uma função.
+Resposta: a) Verdadeiro
