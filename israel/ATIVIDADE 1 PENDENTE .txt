@@ -1,0 +1,205 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Quiz App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: QuizPage(),
+    );
+  }
+}
+
+class QuizPage extends StatefulWidget {
+  @override
+  _QuizPageState createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  int _currentQuestionIndex = 0;
+  int _score = 0;
+
+  List<Question> _questions = [
+    Question(
+      'Qual é a principal diferença entre a inicialização de aplicativos em sistemas Android em comparação com outros paradigmas de programação?',
+      [
+        'Os aplicativos Android iniciam com um método main(), enquanto outros sistemas iniciam com uma instância de Activity.',
+        'Os aplicativos Android iniciam com uma instância de Activity, enquanto outros sistemas iniciam com um método main().',
+        'Os aplicativos Android iniciam com uma instância de Service, enquanto outros sistemas iniciam com um método main().',
+        'Os aplicativos Android iniciam com uma instância de Broadcast Receiver, enquanto outros sistemas iniciam com um método main().'
+      ],
+      1,
+    ),
+    Question(
+      'O que é uma Activity em um aplicativo Android?',
+      [
+        'Uma função específica de gerenciamento de banco de dados.',
+        'Uma classe especializada em operações de entrada e saída.',
+        'Uma interface de usuário visível que permite a interação do usuário com o aplicativo.',
+        'Uma classe responsável pela execução de tarefas em segundo plano.'
+      ],
+      2,
+    ),
+    Question(
+      'Qual é o propósito principal da classe Activity em um aplicativo Android?',
+      [
+        'Gerenciar a lógica de negócios do aplicativo.',
+        'Manipular a comunicação entre componentes do aplicativo.',
+        'Facilitar a interação do usuário com o aplicativo.',
+        'Realizar operações de entrada e saída de dados.'
+      ],
+      2,
+    ),
+    Question(
+      'Como é possível definir uma Activity no manifesto de um aplicativo Android?',
+      [
+        'Através do elemento <service>.',
+        'Através do elemento <broadcastreceiver>.',
+        'Através do elemento <intent-filter>.',
+        'Através do elemento <activity>.'
+      ],
+      3,
+    ),
+    Question(
+      'O que é necessário para uma Activity poder ser iniciada por outra atividade ou componente em um aplicativo Android?',
+      [
+        'A atividade precisa ser declarada no arquivo de manifesto do aplicativo.',
+        'A atividade precisa estar na mesma classe que a atividade chamadora.',
+        'A atividade precisa ser declarada dentro da classe Application.',
+        'A atividade precisa ter uma instância de Broadcast Receiver associada.'
+      ],
+      0,
+    ),
+    Question(
+      'Qual é a principal função do callback onCreate() em uma Activity?',
+      [
+        'Iniciar a atividade quando o usuário a seleciona.',
+        'Inicializar componentes essenciais da atividade, como visualizações e layouts de interface do usuário.',
+        'Atualizar a interface do usuário quando a atividade é retomada.',
+        'Lidar com a pausa da atividade quando o usuário a minimiza.'
+      ],
+      1,
+    ),
+    Question(
+      'Quando o sistema chama o callback onStop() em uma Activity?',
+      [
+        'Quando a atividade está prestes a ser destruída.',
+        'Quando a atividade entra em primeiro plano e se torna interativa.',
+        'Quando a atividade não está mais visível para o usuário.',
+        'Quando a atividade está em segundo plano, mas ainda visível.'
+      ],
+      2,
+    ),
+    Question(
+      'O que é recomendado não fazer dentro do callback onPause() de uma Activity?',
+      [
+        'Realizar operações de entrada e saída de dados.',
+        'Atualizar a interface do usuário.',
+        'Salvar dados de aplicativos ou usuários.',
+        'Executar transações de banco de dados.'
+      ],
+      1,
+    ),
+    Question(
+      'Qual é o último callback que uma Activity recebe antes de ser destruída?',
+      ['onPause()', 'onStop()', 'onDestroy()', 'onRestart()'],
+      2,
+    ),
+    Question(
+      'Como uma Activity é identificada em um aplicativo Android?',
+      [
+        'Através de um ID único gerado automaticamente pelo sistema.',
+        'Pelo nome da classe da Activity especificada no arquivo de manifesto do aplicativo.',
+        'Através de uma chave exclusiva fornecida pelo desenvolvedor.',
+        'Pelo número de instâncias criadas durante a execução do aplicativo.'
+      ],
+      1,
+    ),
+  ];
+
+  void _answerQuestion(int selectedOption) {
+    if (selectedOption == _questions[_currentQuestionIndex].correctOption) {
+      _score++;
+    }
+
+    setState(() {
+      if (_currentQuestionIndex < _questions.length - 1) {
+        _currentQuestionIndex++;
+      } else {
+        _showScoreDialog();
+      }
+    });
+  }
+
+  void _showScoreDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Resultado'),
+        content:
+            Text('Você acertou $_score de ${_questions.length} perguntas.'),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Reiniciar'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              _resetQuiz();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _currentQuestionIndex = 0;
+      _score = 0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Quiz App'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              _questions[_currentQuestionIndex].question,
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 20),
+            ..._questions[_currentQuestionIndex]
+                .options
+                .asMap()
+                .entries
+                .map((option) {
+              return ElevatedButton(
+                child: Text(option.value),
+                onPressed: () => _answerQuestion(option.key),
+              );
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Question {
+  final String question;
+  final List<String> options;
+  final int correctOption;
+
+  Question(this.question, this.options, this.correctOption);
+}
