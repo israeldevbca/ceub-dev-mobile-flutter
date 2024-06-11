@@ -1,0 +1,96 @@
+package br.com.ceub.projeto.playgroundandroidcompose.lista
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import br.com.ceub.projeto.playgroundandroidcompose.R
+import br.com.ceub.projeto.playgroundandroidcompose.lista.data.PaisagemDataSource
+import br.com.ceub.projeto.playgroundandroidcompose.lista.model.Paisagem
+import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.CorCeub
+import br.com.ceub.projeto.playgroundandroidcompose.ui.theme.PlaygroundAndroidComposeTheme
+
+class ListaPaisagemActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            PlaygroundAndroidComposeTheme {
+                Surface(color = CorCeub, modifier = Modifier.fillMaxSize()) {
+                    AppLista()
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun AppLista() {
+        val listaPaisagens = PaisagemDataSource().consultarPaisagem()
+        PaisagemLista(lista = listaPaisagens)
+    }
+
+    @Composable
+    fun PaisagemCard(paisagem: Paisagem, modifier: Modifier) {
+        Card(modifier = modifier.padding(8.dp)) {
+            Column {
+                Image(
+                    painter = painterResource(id = paisagem.idImg),
+                    contentDescription = paisagem.descricao,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentScale = ContentScale.Crop
+                )
+
+                Text(
+                    text = paisagem.descricao,
+                    modifier = Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.subtitle1
+                )
+            }
+        }
+    }
+
+    @Composable
+    fun PaisagemLista(lista: List<Paisagem>, modifier: Modifier = Modifier) {
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(2),
+            modifier = modifier.fillMaxWidth()
+        ) {
+            items(lista) { paisagem ->
+                PaisagemCard(paisagem = paisagem, modifier = Modifier.fillMaxWidth())
+            }
+        }
+    }
+
+    @Preview
+    @Composable
+    fun AppListaPreview() {
+        val listaPaisagens = listOf(
+            Paisagem(R.drawable.image1, "Imagem 1"),
+            Paisagem(R.drawable.image2, "Imagem 2"),
+            Paisagem(R.drawable.image3, "Imagem 3"),
+            Paisagem(R.drawable.image4, "Imagem 4"),
+            Paisagem(R.drawable.image5, "Imagem 5"),
+            Paisagem(R.drawable.image6, "Imagem 6"),
+            Paisagem(R.drawable.image7, "Imagem 7"),
+            Paisagem(R.drawable.image8, "Imagem 8"),
+            Paisagem(R.drawable.image9, "Imagem 9"),
+            Paisagem(R.drawable.image10, "Imagem 10")
+        )
+        PaisagemLista(lista = listaPaisagens)
+    }
+}
