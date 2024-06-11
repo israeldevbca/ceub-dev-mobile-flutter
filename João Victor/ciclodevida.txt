@@ -1,0 +1,14 @@
+AAtividade override telas - (log)
+ao executar:
+2024-06-03 10:21:24.246 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onCreate 
+2024-06-03 10:21:24.337 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onStart
+
+ao girar na horizontal:
+2024-06-03 10:22:10.115 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onPause
+2024-06-03 10:22:10.121 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onStop
+2024-06-03 10:22:10.144 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onCreate
+2024-06-03 10:22:10.146 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onStart
+
+ao clicar no menu:
+2024-06-03 10:23:50.578 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onPause
+2024-06-03 10:23:50.689 11953-11953     com...mple.playgroundandroidcompose TELA I ACESSANDO onStop

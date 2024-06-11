@@ -1,0 +1,4 @@
+package misturaletras
+
+class appgameactivity {
+}

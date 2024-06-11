@@ -1,0 +1,41 @@
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Log.i("TELA", "onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("TELA", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("TELA", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("TELA", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("TELA", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("TELA", "onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("TELA", "onRestart")
+    }
+}
