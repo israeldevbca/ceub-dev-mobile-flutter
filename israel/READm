@@ -1,0 +1,36 @@
+# AppListaDeTarefas
+
+## Logo
+
+
+## Funcionalidades
+- Adicionar, editar e excluir tarefas
+- Marcar tarefas como concluídas
+- Uso de ViewModel
+- Navegação com NavController e NavHost
+- Exibição das tarefas em uma lista
+- Suporte para tema dark e light conforme Material Design 3
+- Botões para ações principais
+- Imagens ilustrativas para cada tarefa
+- Fonte personalizada para os textos
+- Criação da Top Bar
+- Implementação de uma animação simples ao concluir uma tarefa
+
+
+## Descrição das funcionalidades
+- **Adicionar Tarefas:** Permite ao usuário adicionar novas tarefas à lista.
+- **Editar Tarefas:** Permite ao usuário editar tarefas existentes.
+- **Excluir Tarefas:** Permite ao usuário excluir tarefas da lista.
+- **Marcar como Concluída:** Permite ao usuário marcar tarefas como concluídas, movendo-as para uma seção separada.
+- **Tema Dark e Light:** Alterna entre temas escuro e claro conforme as diretrizes do Material Design 3.
+- **Top Bar:** Barra superior com o título do aplicativo e opções de menu.
+- **Animação Simples:** Animação ao marcar uma tarefa como concluída.
+
+## Integrantes do grupo
+- Israel
+
+
+
+
+
+
